@@ -40,6 +40,7 @@
   ![onlyDivInsideClass](img/onlyDivInsideClass.PNG)
 
 - ลำดับของการ nested sass
+
   ![nestedSass1](img/nestedSass1.PNG)
 
   - `case1:` หมายความว่า div และ last-child ตัวสุดท้าย หรือก็คือ last-child ตัวสุดท้ายของ div นั่นเอง
