@@ -4,12 +4,13 @@
   - header
   - content
   - footer
+- layout คือเค้าโครงที่เป็น page 1 page เอามาไว้ใน root component อย่าง App.js เพื่อเอามาทำ route
 - อะไรที่มันซ้ำๆใช้บ่อยๆ แยกออกมาเป็น component
 - styled-component ใช้จัดการ style css ทำให้เราสามารถเขียน css ใน component และจัดการอะไรง่ายขึ้น แทนการไปเขียนไฟล์ css และ import มาใช้ หรือ เขียนแบบ inline (`เขียนโดยใช้ sass`)
 - การเขียน css เป็นไฟล์ import มาใช้จะมีปัญหาที่ css มันจะกลายเป็น Global style ทำให้มันส่งผลกับทั้ง app ทำให้ถ้าแก้ที่นึงมันอาจกระทบทั้ง app จัดการยาก
 - React เราควรจะจัดการ component ให้จบภายในตัวมันเอง จัดการ style css ในตัวเอง ไม่ไปกระทบกับ component อื่นๆ (`ใช้ styled-component เข้ามาช่วย)` เพื่อป้องกัน css จะมีโอกาสทับกัน
 - style global ควรจัดการเกี่ยวกับพวก body,text,headline,clear css margin 0 ,padding 0,font-family,font-size เป็นต้น
-- ควรทำ component ให้ยืดหยุ่น ไม่ควร fix width ควร set width 100% (`เพื่อให้เอื้อต่อการทำ responsive`)
+- ควรทำ component ให้ยืดหยุ่น ไม่ควร fix width ควร set width 100% (`เพื่อให้เอื้อต่อการทำ responsive`) โดย default มันจะ width 100% อยู่แล้วถ้าเราไม่กำหนด
 - ปัจจุบันควรเขียนเป็น functional component จะดีกว่า class component เพราะ performance จะดีกว่า
 - ควรวางโครง HTML ก่อนค่อยใส่ style css
 - พยายามยุบ code css ให้มันใช้ที่เดียวแล้วให้ overide ให้มากที่สุดจะได้ไม่ต้องไปเขียนย่อยหลายที่ เวลาแก้ต้องไปตามแก้หลายที่ด้วย
@@ -33,6 +34,26 @@
   - white-space: nowrap; => คือถ้าเจอ white space ไม่ต้องไปตัดหรือ wrap มัน
   - text-overflow: ellipsis; => คือใส่ ... ให้กับ text ที่มัน overflow
 
+- ความแตกต่างระหว่าง block,inline \
+  `block`
+
+  - ถ้าไม่ได้ set width มันจะกางเต็ม width 100% เป็น default
+  - มี margin,padding
+  - ถ้าไม่ได้ set height มันจะสูงเท่ากับ content ที่อยู่ภายใน
+  - block element โดย default มันจะกางเต็มพื้นที่แนวนอน แล้วเรียงลงมาเรื่อยๆ
+  - ไม่สามารถ set vertical-align ได้
+  - ไม่จำเป็นต้อง fix width หรือ set width 100% ถ้าต้องการให้ content ที่อยู่ข้างในมันกางเต็มที่
+
+  `inline`
+
+  - มันจะขึ้นอยู่กับ text content
+  - มันจะเรียงในแนวนอนต่อกันไปเรื่อยๆ ไม่ได้ขึ้นบรรทัดใหม่เหมือน `block`
+  - ถ้าต้องการ set white space ให้ set ที่ css
+  - set margin top,bottom ไม่มีผล มีผลแค่ margin left,right
+  - padding set ได้หมด
+  - ไม่สามารถ set width, height ได้
+  - สามารถ set vertical align ได้
+
 - ถ้าเราไม่ได้ใช้ flex box แล้วต้องการจะกำหนด vertical ให้ element เราใช้ vertical-align ลองไปหาดูต่อ (`วิธีนี้ก็จะยุ่งยากเพราะมันต้องไปกำหนดให้ทุก element ใช้ flex box จัดการจะง่ายกว่า`)
 - เราควรเริ่มเขียน html css บนลงล่าง ซ้ายไปขวา
 - onlyDivInsideClass => เฉพาะ class หรือ element ที่อยู่ภายใต้ class css นี้เท่านั้น (`ก็คือแค่ child ของ class css นี้เท่านั้นไม่รวม nested ที่ซ้อนลงไปอีก`)
@@ -52,3 +73,7 @@
   ![nestedSass3](img/nestedSass3.PNG)
 
   - `case3:` หมายความว่า class last-child ของ div การเขียนแบบนี้เป็นการเขียน css ปกติ ซึ่งเราไม่นิยมเขียน จะเขียนเป็นแบบ case 1 มากว่าเพื่อลด duplicate ของ code ลง
+
+- การกำหนดให้มันอยู่ตรงกลางโดยไม่ใช้ flex `margin : 0 auto;` แล้วถ้าอยากให้มันห่างกับซ้ายขวาเมื่อมีการยืดหด responsive ให้กำหนด `padding : 0 60px;` เป็นต้น
+- css ที่จะเอาไว้เขียนสำหรับ email ปกติจะใช้ไม่ได้มันจะเพี้ยน ต้องเขียนเป็น inline style แล้วก็ใช้ table ในการจัดการ layout
+- `text-align: center;` เป็นการ set ให้พวก inline element อยู่ตรงกลาง
