@@ -7,6 +7,7 @@
 - layout คือเค้าโครงที่เป็น page 1 page เอามาไว้ใน root component อย่าง App.js เพื่อเอามาทำ route
 - อะไรที่มันซ้ำๆใช้บ่อยๆ แยกออกมาเป็น component
 - styled-component ใช้จัดการ style css ทำให้เราสามารถเขียน css ใน component และจัดการอะไรง่ายขึ้น แทนการไปเขียนไฟล์ css และ import มาใช้ หรือ เขียนแบบ inline (`เขียนโดยใช้ sass`)
+- ข้อควรระวังเวลาเขียน styled-component อย่าซ้อนกันเกิน 4 ชั้น จะมีผลต่อ Performance แต่ไม่ได้มีมากขนาดนั้น แค่เล็กๆน้อยๆ
 - การเขียน css เป็นไฟล์ import มาใช้จะมีปัญหาที่ css มันจะกลายเป็น Global style ทำให้มันส่งผลกับทั้ง app ทำให้ถ้าแก้ที่นึงมันอาจกระทบทั้ง app จัดการยาก
 - React เราควรจะจัดการ component ให้จบภายในตัวมันเอง จัดการ style css ในตัวเอง ไม่ไปกระทบกับ component อื่นๆ (`ใช้ styled-component เข้ามาช่วย)` เพื่อป้องกัน css จะมีโอกาสทับกัน
 - style global ควรจัดการเกี่ยวกับพวก body,text,headline,clear css margin 0 ,padding 0,font-family,font-size เป็นต้น
@@ -77,3 +78,6 @@
 - การกำหนดให้มันอยู่ตรงกลางโดยไม่ใช้ flex `margin : 0 auto;` แล้วถ้าอยากให้มันห่างกับซ้ายขวาเมื่อมีการยืดหด responsive ให้กำหนด `padding : 0 60px;` เป็นต้น
 - css ที่จะเอาไว้เขียนสำหรับ email ปกติจะใช้ไม่ได้มันจะเพี้ยน ต้องเขียนเป็น inline style แล้วก็ใช้ table ในการจัดการ layout
 - `text-align: center;` เป็นการ set ให้พวก inline element อยู่ตรงกลาง
+- ถ้าอยาก set image เป็น background => ให้ใช้ `background : url(src รูป) no-repeat center center`
+- การทำหน้า ui ควรวางโครง Html ให้เสร็จก่อน แล้วค่อยไปเขียน css
+- ควรทำ Main layout ที่มีพวก sidebar,menu bar,header เป็น base แล้วนำไป re-use โดยการเอา component ต่างๆ ไป render ผ่าน props children ของ component Main layout ที่เราสร้างขึ้น
