@@ -81,3 +81,40 @@
 - ถ้าอยาก set image เป็น background => ให้ใช้ `background : url(src รูป) no-repeat center center`
 - การทำหน้า ui ควรวางโครง Html ให้เสร็จก่อน แล้วค่อยไปเขียน css
 - ควรทำ Main layout ที่มีพวก sidebar,menu bar,header เป็น base แล้วนำไป re-use โดยการเอา component ต่างๆ ไป render ผ่าน props children ของ component Main layout ที่เราสร้างขึ้น
+- ถ้ามีรูปแล้วมีหลากหลายขนาด แล้วเราต้องการ fig ขนาด แต่ไม่อยากให้มันแสดงผลเพี๊ยน ให้ set รูปเป็น background url แทน(สามารถ set ตำแหน่งของรูปที่จะเอามาแสดงได้) แล้วใช้ background-size ในการจัดการแสดงผล
+  - background-size: contain => เห็นภาพเต็มแล้วบีบอัตราส่วนให้ตรงตามที่เรา set ไว้
+  - background-size: cover => ขยายภาพให้อัตราส่วนมันเต็มตามที่เรา set ไว้ (ถ้าภาพเราเล็ก แล้วโดนขยายจะทำให้ภาพแตกได้)
+- การ set position: absolute ทำให้ element มันอิสระ แต่ถ้าอยากให้มันอิสระแล้วอ้างกับ parent element เราต้องกำหนด parent element ให้ position: relative เพื่อให้ child element มันอ้างอิงตำแหน่งได้ (ถ้าไม่กำหนดมันจะอิงตาม element ใหญ่สุดที่ครอบมันอีกที)
+- overflow คือการ set ให้ content ที่อยู่ข้างในที่เกินตัว wrapper ที่ครอบเป็นแบบไหน
+  - hidden => ซ่อน content ที่เกิน
+  - auto => ถ้า content เกินจะ auto scrollbar ให้ แต่ถ้าไม่เกินก็แสดงผลปกติ
+  - scrollbar => จัดการ content ให้มี scrollbar ถ้าเกินจะมี scrollbar ให้เลื่อน
+- ถ้าเรามี text ยาวๆ แล้วอยากให้แสดงแค่ 2 บรรทัดหรือแค่บางส่วนไม่แสดงทั้งหมด เราก็ใช้ overflow กับการกำหนด height (`หรือสามารถใช้การ line-clamp`)
+- ใช้ @media ในการทำ responsive ในแต่ละขนาด break-point ที่เราต้องการจัดการ css ในแต่ละขนาด break-point หน้าจอ
+  - @media screen and (max-width: x px) => break-point หน้าจอขนาดเล็กกว่าหรือเท่ากับ x px
+  - @media screen and (min-width: x px) => break-point หน้าจอขนาดใหญ่กว่าหรือเท่ากับ x px \
+    `Note:` ส่วนใหญ่นิยมใช้ max-width เพราะเราไล่ทำจากใหญ่ไปเล็ก
+- css piority
+  - .a.b => class b ร่วมกันกับ class a เป็น element เดียวกัน (`b กับ a ที่เป็น element เดียวกัน`)
+  - .a .b => class b เป็น child แล้วมี class a เป็น parent (`b อยู่ใน a`)
+
+```
+css piority ใน sass
+  .a {
+    .b {
+
+    }
+  }
+  => จะมีค่าเท่ากับ .a .b
+
+  .a {
+    &.b {
+
+    }
+  }
+  => จะมีค่าเท่ากับ .a.b
+```
+
+- css id(#) จะ piority ใหญ่กว่า css class(.) ทำให้ไม่ว่าเราจะกำหนดอะไรที่ css class จะไม่สามารถ overide css id ได้
+- !important จะไม่สน piority จะ overide ได้หมดไม่สนอะไรเลย
+- style attribute เป็น inline css ที่ piority ใหญ่สุด css id หรือ class css ไม่สามารถ overide ได้ ยกเว้นใส่ !important
