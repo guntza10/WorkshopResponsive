@@ -94,6 +94,7 @@
   - @media screen and (max-width: x px) => break-point หน้าจอขนาดเล็กกว่าหรือเท่ากับ x px
   - @media screen and (min-width: x px) => break-point หน้าจอขนาดใหญ่กว่าหรือเท่ากับ x px \
     `Note:` ส่วนใหญ่นิยมใช้ max-width เพราะเราไล่ทำจากใหญ่ไปเล็ก
+- responsive break-point ที่รองรับเล็กสุดคือ width 375px
 - css piority
   - .a.b => class b ร่วมกันกับ class a เป็น element เดียวกัน (`b กับ a ที่เป็น element เดียวกัน`)
   - .a .b => class b เป็น child แล้วมี class a เป็น parent (`b อยู่ใน a`)
@@ -118,3 +119,9 @@ css piority ใน sass
 - css id(#) จะ piority ใหญ่กว่า css class(.) ทำให้ไม่ว่าเราจะกำหนดอะไรที่ css class จะไม่สามารถ overide css id ได้
 - !important จะไม่สน piority จะ overide ได้หมดไม่สนอะไรเลย
 - style attribute เป็น inline css ที่ piority ใหญ่สุด css id หรือ class css ไม่สามารถ overide ได้ ยกเว้นใส่ !important
+- ใช้ flexbox ในการแบ่ง element แล้วต้องการให้ด้านนึงยืดหดได้ แต่อีกด้านนึงไม่ได้หดตามก็ fig ไว้ด้านนึง flex : 1; กางเต็มพื้นที่ flexbox container อีกด้านนึง fig width ไว้ตามที่เราต้องการ แค่นี้ด้านที่ flex: 1; ก็จะยืดหดได้เต็มพื้นที่ flexbox container ส่วนอีกด้านจะไม่ยืดหด เพราะถูก fig width ไว้
+- การ set min-width,min-height => เป็นการ set limit ไว้ว่า width,height ที่น้อยสุดคือเท่านี้นะ ไม่สามารถเล็กได้กว่านี้แล้ว
+- การ set max-width,max-height => เป็นการ set limit ไว้ว่า width,height ที่มากสุดคือเท่านี้นะ ไม่สามารถใหญ่ได้กว่านี้แล้ว
+- flex-wrap เป็น property ของ flex box ที่เอาไว้จัดการ flex item เมื่อโดนบีบ แล้วพื้นที่ flexbox container ไม่พอ จะให้มันเป็นแบบไหน (การจะใช้ได้อย่าลืมใช้ property flex แบ่งอัตราส่วนพื้นที่ให้ flex item ด้วย เพื่อให้ flex item มันรู้อัตราส่วนพื้นที่ๆสามารถกางได้ว่ากว้างได้ขนาดไหน)
+  - flex-wrap : wrap; เมื่อโดนบีบแล้วพื้นที่ flex container ไม่พอมันจะ wrap ตบลงมาข้างล่าง
+- ถ้าอยากให้ flex item มันยืดหรือหดได้เต็มพื้นที่ อย่าลืมกำหนด flex อัตราส่วนให้ flex item ด้วย ถ้าไม่กำหนดมันจะยืดได้แค่ตาม width ที่เราไป fig ไว้จะไม่ได้ยืดเต็มพื้นที่ flex container
